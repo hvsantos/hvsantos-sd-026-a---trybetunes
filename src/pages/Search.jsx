@@ -45,10 +45,10 @@ export default class Search extends Component {
           { `Resultado de álbuns de: ${artist}` }
         </p>
         {resultAlbums.map((obj) => {
-          const { artistId, artworkUrl100, collectionName,
+          const { artworkUrl100, collectionName,
             artistName, collectionId } = obj;
           return (
-            <div key={ `${artistId}-${collectionName}` }>
+            <div key={ `${collectionId}` }>
               <img src={ artworkUrl100 } alt={ `${collectionName} img` } />
               <h2>{ collectionName }</h2>
               <h3>{ artistName }</h3>
