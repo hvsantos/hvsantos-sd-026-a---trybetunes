@@ -12,14 +12,15 @@ export default class Album extends Component {
     loading: true,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    const response = await getMusics(id);
-    const albumInfo = await response[0];
-    this.setState({
-      albumInfo,
-      albumSongs: response.slice(1),
-      loading: false,
+    getMusics(id).then((resp) => {
+      const albumInfo = resp[0];
+      this.setState({
+        albumInfo,
+        albumSongs: resp.slice(1),
+        loading: false,
+      });
     });
   }
 
@@ -47,8 +48,10 @@ export default class Album extends Component {
                 { albumSongs.map((song) => (
                   <MusicCard
                     key={ song.trackId }
+                    song={ song }
                     trackName={ song.trackName }
                     previewUrl={ song.previewUrl }
+                    trackId={ song.trackId }
                   />
                 )) }
               </div>
